@@ -1,0 +1,111 @@
+[problem description]
+
+Write a program to manage the scores of N players in a group match. (4 ≤ N ≤ 100,000)
+
+ 
+
+Each player has a different ID, and the ID is one of the numbers from 1 to N.
+
+For convenience, the player whose ID is a is referred to as player a.
+
+At first, all players compete in teams of one. Therefore, all players are in different groups.
+
+Before the start of the group match, all players' scores are zero.
+
+ 
+
+As the group matches progress, two different groups may be combined into one group.
+
+When combining into a group, the existing scores of each player are maintained.
+
+And the result of the match in the combined group is reflected equally to all players belonging to the group.
+
+ 
+
+Group matches are played by selecting two different groups from among several groups.
+
+When the result of the game is judged and the score is determined, the score is reflected in the score of the players belonging to each group.
+
+The score is between 1 and 100, and the number of points won by the winning group and the number of points lost by the losing group is the same.
+
+ 
+
+For example, if Group A and Group B play and Group A scores 3 points, Group B loses 3 points.
+
+Also, all players in Group A get 3 points and all players in Group B lose 3 points.
+
+ 
+
+void  init( int  N)
+
+Called at the beginning of each test case .
+
+N is the number of players participating in group matches .
+
+ 
+
+All players compete in one team .
+
+The initial score for all players is 0 .
+
+ 
+
+Parameters
+
+N : Number of players participating in group matches (4 ≤ N ≤ 100,000)
+
+void  updateScore( int  mWinnerID,  int  mLoserID,  int  mScore)
+
+It is a function that selects two different groups to play the match and updates the result of the match .
+
+The group in which the player whose ID is mWinnerID belongs wins, and the players in that group get mScore points .
+
+The group in which the player whose ID is mLoserID belongs is defeated and the players in that group lose mScore points .
+
+ 
+
+The case where the mWinnerID player and mLoserID player are in the same group is not given .
+
+ 
+
+Parameters
+
+mWinnerID: The ID of the player belonging to the winning group (1 ≤ mWinnerID ≤ N)
+
+mLoserID: The ID of the player belonging to the losing group (1 ≤ mLoserID ≤ N)
+
+mScore : The score the winning group gets (1 ≤ mScore ≤ 100)
+
+void  unionTeam( int  mPlayerA,  int  mPlayerB)
+
+This function selects two different groups and merges them into one group .
+
+Combine the group with the player whose ID is mPlayerA and the group with the player whose ID is mPlayerB into one group .
+
+ 
+
+The case where mPlayerA and mPlayerB are in the same group is not given .
+
+ 
+
+Parameters
+
+mPlayerA: ID of the selected player (1 ≤ mPlayerA ≤ N)
+
+mPlayerB: ID of the selected player (1 ≤ mPlayerB ≤ N)
+
+int  getScore( int  mID)
+
+Check the score of the athlete whose ID is mID .
+
+ 
+
+Parameters
+
+mID: The ID of the player to check the score for (1 ≤ mID ≤ N)
+
+ 
+
+Returns
+
+Score of athlete with    ID mID
