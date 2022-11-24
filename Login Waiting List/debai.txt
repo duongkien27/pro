@@ -1,0 +1,480 @@
+[Problem Description]
+
+
+You want to create a website which is accessed and used by many people.
+
+
+When the number of people logging in increases and exceeds the number of users the website can handle, the people who are to log in next will all be added to the login waiting list.
+
+
+If there is a login ID on the waiting list that is the same with the ID which is to be added, the ID on the list is deleted before being newly added.
+
+
+There are times when all IDs that start with mStr[] are removed from the list because they were deactivated due to disconnection while waiting to log in.
+
+
+In addition, when the number of people accessing the site decreases, IDs are connected to the site in order as listed on the waiting list. The ID that is connecting to the site is deleted from the waiting list.
+
+
+ 
+
+
+You want to check the position of a certain ID on the waiting list to know the time it takes for it to be connected to the site.
+
+
+You are required to write a program that manages the login waiting list.
+
+
+ 
+
+
+Implement each required function by referring to the following API description.
+
+
+※ The function signature below is based on C/C++. As for Java, refer to the provided Solution.java and UserSolution.java.
+
+
+The following is the description of API to be written in the User Code.
+
+
+void init()
+
+This function is called in the beginning of each test case.
+
+ 
+
+The number of people accessing the site is full and the login waiting list is empty.
+
+ 
+
+void loginID(char mID[])
+
+This function logs in to the site as mID. However, as the number of people accessing the site exceeded the capacity, this function adds it to the login waiting list.
+
+ 
+
+ 
+
+When mID is already on the list, this function deletes the previous mID and newly adds it to the list.
+
+ 
+
+mID is a string made up of lowercase letters whose length is greater or equal to 5 but 9 at most. It ends with ‘＼0’.
+
+ 
+
+It is guaranteed that mID is not connected to the site.
+
+After being connected to the site while waiting on the list, you can deactivate it and log in again.
+
+ 
+
+ 
+
+Parameters
+
+  mID   : The ID used to log in to the site ( 5 ≤ The length of mID ≤ 9 )
+
+int closeIDs(char mStr[])
+
+Due to disconnection, this function deletes all IDs that start with mStr on the login waiting list and returns the number of the deleted IDs.
+
+ 
+
+mStr is a string made up of lowercase letters whose length is greater or equal to 3 but 5 at most. It ends with ‘＼0’.
+
+ 
+
+When there are no IDs deleted from the list, this function returns 0.
+
+ 
+
+ 
+
+ 
+
+Parameters
+
+  mStr   : The starting string of the ID that is deleted from the list ( 3 ≤ The length of mStr ≤ 5 )
+
+ 
+
+Returns
+
+  The number of IDs that is deleted from the login waiting list
+
+void connectCnt(int mCnt)
+
+Based on when the IDs were added to the login waiting list, this function makes mCnt IDs be connected to the site. This function deletes the IDs connected to the site from the waiting list.
+
+ 
+
+It is guaranteed that the number of IDs on the login waiting list is greater or equal to mCnt.
+
+Parameters
+
+  mCnt    : The number of IDs connected to the site (1 ≤ mCnt ≤ 10 )
+
+int waitOrder(char mID[])
+
+This function returns the position of mID on the waiting list which lists the IDs in waiting order.
+
+ 
+
+ 
+
+When there is NO mID on the login waiting list, this function returns 0.
+
+ 
+
+mID is a string made up of lowercase letters whose length is greater or equal to 5 but 9 at most. It ends with ‘＼0’.
+
+ 
+
+mID can be an ID that has not yet been connected to the site in loginID().
+
+ 
+
+ 
+
+Parameters
+
+  mID    : The ID that checks the position on the login waiting list ( 5 ≤ The length of mID ≤ 9 )
+
+ 
+
+Returns
+
+  The position of mID on the waiting list
+
+
+ 
+
+
+ 
+
+
+[Example]
+
+
+The following shows test case 1 from the start in order.
+
+
+Order
+
+Function
+
+Note
+
+Figure
+
+1
+
+init()
+
+ 
+
+ 
+
+2
+
+logInID(“faster”)
+
+ 
+
+ 
+
+3
+
+logInID(“first”)
+
+ 
+
+ 
+
+4
+
+logInID(“second”)
+
+ 
+
+ 
+
+5
+
+logInID(“third”)
+
+ 
+
+ 
+
+6
+
+logInID(“firster”)
+
+ 
+
+ 
+
+7
+
+waitOrder(“firster”)
+
+return 5
+
+[Fig. 1]
+
+
+[Table 1]
+
+
+When executing Order 7. waitOrder(“firster”), the login waiting list is as in [Fig. 1].
+
+
+
+
+ 
+
+
+[Table 2] is the function call after [Table 1].
+
+
+Order
+
+Function
+
+Note
+
+Figure
+
+8
+
+logInID(“fourth”)
+
+ 
+
+ 
+
+9
+
+connectCnt(1)
+
+ 
+
+ 
+
+10
+
+closeIDs(“fasti”)
+
+return 0
+
+ 
+
+11
+
+waitOrder(“first”)
+
+return 1
+
+ 
+
+12
+
+closeIDs(“fir”)
+
+return 2
+
+ 
+
+13
+
+waitOrder(“firster”)
+
+return 0
+
+ 
+
+14
+
+waitOrder(“fourth”)
+
+return 3
+
+[Fig. 2]
+
+
+[Table 2]
+
+
+When executing Order 14. waitOrder(“fourth”), the login waiting list is as in [Fig. 2].
+
+
+
+
+ 
+
+
+[Table 3] is the function call after [Table 2].
+
+
+Order
+
+Function
+
+Note
+
+Figure
+
+15
+
+logInID(“second”)
+
+ 
+
+ 
+
+16
+
+waitOrder(“second”)
+
+return 3
+
+ 
+
+17
+
+waitOrder(“fourth”)
+
+return 2
+
+[Fig. 3]
+
+
+[Table 3]
+
+
+When executing Order 17. waitOrder(“fourth”), the login waiting list is as in [Fig. 3].
+
+
+
+
+ 
+
+
+[Table 4] is the function call after [Table 3].
+
+
+Order
+
+Function
+
+Note
+
+Figure
+
+18
+
+logInID(“alpha”)
+
+ 
+
+ 
+
+19
+
+logInID(“asdfgh”)
+
+ 
+
+ 
+
+20
+
+connectCnt(1)
+
+ 
+
+ 
+
+21
+
+waitOrder(“fourth”)
+
+return 1
+
+ 
+
+22
+
+waitOrder(“third”)
+
+return 0
+
+ 
+
+23
+
+logInID(“third”)
+
+ 
+
+ 
+
+24
+
+waitOrder(“third”)
+
+return 5
+
+[Fig. 4]
+
+
+[Table 4]
+
+
+When executing Order 24. waitOrder(“third”), the login waiting list is as in [Fig. 4].
+
+
+
+
+ 
+
+
+ 
+
+
+[Constraints]
+
+
+1. init() is called in the beginning of each test case.
+
+
+2. For each test case, the maximum number of IDs deleted from the login waiting list of closeIDs() is 20.
+
+
+3. For each test case, loginID() is called up to 50,000 times.
+
+
+4. For each test case, closeIDs() is called up to 5,000 times each.
+
+
+5. For each test case, connectCnt() and waitOrder() are called up to 1,000 times each.
+
+
+ 
+
+
+ 
+
+
+[Input and Output]
+
+
+As the input and output are processed in the provided code in the Main, they are not processed separately in the User Code.
+
+
+ 
+
+
+The output result for the sample input is in the format of “#TC number result.” It is the correct answer if the result is 100; it is the wrong answer if it is 0.
